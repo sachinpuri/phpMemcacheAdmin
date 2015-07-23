@@ -1,0 +1,55 @@
+body,table{font:normal 14px arial; margin:0}
+ul{list-style:none; margin:0; padding:0}
+h1,h2{margin:0; padding:5px; color:#298D83;}
+h3{text-align:center}
+
+nav ul{border-bottom:4px solid #514745; margin-top:10px}
+nav ul li{display:inline-block; padding:5px 15px; background:#514745;}
+nav ul li a{color:#F1F1F1; text-decoration: none}
+
+#server-connect-error{border:5px solid #000; font:bold italic 16px/50px arial; margin:50px auto; background:#514745; color:#fff; padding:10px; width:500px; text-align:center; height:300px}
+#server-connect-error a{color:#fff; display:block}
+
+#keys{border:1px solid; width:200px; height:500px; overflow:auto; background:#cdcdcd; }
+#keys ul li{padding:5px}
+#keys ul li a{text-decoration: none; color:#000}
+#value{float:left; border:1px solid; width:99%; height:80%; overflow:hidden; margin:5px}
+
+#slabs{width:90%; margin:10px auto}
+#slabs li{float:left; margin:10px }
+#slabs li a{background: #514745; color:#fff; padding:5px; width:100px; display: inline-block; text-decoration: none}
+#slabs li a:hover{box-shadow: 0px 0px 10px #333}
+
+table{border:2px solid #514745;}
+.table-heading{background: #514745; color:#fff}
+.table-even{background:#cdcdcd}
+.table-odd{background:#f1f1f1}
+
+label {float: left; text-align: left; width: 140px;}            
+input[type=text] {border: 1px solid #cccccc; font: 12px verdana; margin-bottom: 5px;}
+
+.gbqfba{
+    background: -moz-linear-gradient(center top , #f5f5f5, #f1f1f1) repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    color: #444 !important;
+    font-size: 11px;                
+    -moz-user-select: none;
+    border-radius: 2px;
+    cursor: default !important;
+    display: inline-block;
+    font-weight: bold;
+    height: 38px;
+    line-height: 29px;
+    min-width: 54px;
+    padding: 0 8px;
+    text-align: center;
+    text-decoration: none !important;
+    margin-top:-43px;
+}
+
+#tblKeys{margin:5px; float: left; position:absolute; display:none; top:-12px; right:-10px; overflow:auto; max-height: 500px; width:400px}
+#tblKeys tr td a{text-decoration: none; color:#000}
+#btnKeys{float:right; cursor:pointer; position: relative}
+#btnKeys:hover #tblKeys{display:block}
+
+.slabs_h2{margin-left:80px}
