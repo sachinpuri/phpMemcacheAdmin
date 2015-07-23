@@ -60,12 +60,14 @@ class MemcacheClient {
     }
     
     function connectToServerNo($serverNo){
-        $this->connect($this->servers[$serverNo]['host'], $this->servers[$serverNo]['port']);
+        return $this->connect($this->servers[$serverNo]['host'], $this->servers[$serverNo]['port']);
     }
 
     function get($key) {
         $hash=$this->getHash($key);
-        $this->connectToServerNo($this->getServer($hash));
+        if(!$this->connectToServerNo($this->getServer($hash))){
+            return "NO_RESULT_FOUND";
+        }
         $value = $this->execute("get $key");
         $lines = explode("\r\n", $value);
         #pr($lines);
@@ -134,6 +136,11 @@ class MemcacheClient {
     }
 
     function execute($command) {
+//        if($this->con==false){
+//            $this->log($command);
+//            echo "Not connected to server";
+//            die;
+//        }
         fwrite($this->con, $command . "\r\n");
         $data = $this->read();
         return $data;
@@ -164,7 +171,9 @@ class MemcacheClient {
     function getSlabs() {
         $itemIds = array();
         foreach($this->servers as $server){
-            $this->connect($server['host'],$server['port']);
+            if(!$this->connect($server['host'],$server['port'])){
+                continue;
+            }
             $items=$this->statsi();
             $lines = explode("\r\n", $items);
             foreach ($lines as $v) {
@@ -183,7 +192,7 @@ class MemcacheClient {
         return $itemIds;
     }
 
-    function getKeys($server, $slabId, $limit = 100) {
+    function getKeys($server, $slabId, $limit = 100) {        
         $this->connectToServerNo($server);
         $items = $this->dump($slabId, $limit);
         $lines = explode("\r\n", $items);

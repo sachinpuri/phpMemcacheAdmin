@@ -33,20 +33,22 @@ if (isset($_GET['delete'])) {
 }
 
 $allSlabs = $mem->getSlabs();
+#pr($allSlabs);die;
 $allKeys = array();
 $ctr=0;
 foreach($allSlabs as $server=>$slabs){
-    foreach ($slabs as $slabId => $slabDetails) {
-        $keys = $mem->getKeys($ctr, $slabId);
+    foreach ($slabs as $slabId => $slabDetails) {        
+        $keys = $mem->getKeys(getServerId($server), $slabId);
         $keys = array_reverse($keys);
         foreach ($keys as $key) {
             if (is_numeric(strpos($key, $_GET['search']))) {
-                $allKeys[] = $key;
+                $allKeys[$server][] = $key;
             }
         }
     }
     $ctr++;
 }
+#pr($allKeys);die;
 if (isset($_GET['key'])) {
     $value = $mem->get($_GET['key']);
 } else {
@@ -100,7 +102,8 @@ if (isset($_GET['key'])) {
             </tr>
             <?php
             $i = 0;
-            foreach ($allKeys as $no => $key) {
+            foreach ($allKeys as $server => $keys) {
+            foreach ($keys as $no => $key) {
                 $i++;
                 ?>
                 <tr class="<?php echo ($i % 2 == 0) ? 'table-even' : 'table-odd' ?>">
@@ -110,7 +113,7 @@ if (isset($_GET['key'])) {
                     <td width="50"><a href="index.php?action=search&search=<?php echo $_GET['search'] ?>&key=<?php echo $key ?>">View</a></td>
                     <td width="50"><a href="index.php?action=search&search=<?php echo $_GET['search'] ?>&delete=<?php echo $key ?>">Delete</a></td>
                 </tr>
-            <?php } ?>
+            <?php }} ?>
         </table>  
     </form>
 <?php } ?>
