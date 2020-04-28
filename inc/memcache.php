@@ -136,11 +136,12 @@ class MemcacheClient {
     }
 
     function execute($command) {
-//        if($this->con==false){
-//            $this->log($command);
-//            echo "Not connected to server";
-//            die;
-//        }
+       if($this->con==false){
+        $this->connectToServerNo(0);
+        //    $this->log($command);
+        //    echo "Not connected to server";
+        //    die;
+       }
         fwrite($this->con, $command . "\r\n");
         $data = $this->read();
         return $data;
